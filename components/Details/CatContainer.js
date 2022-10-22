@@ -28,8 +28,6 @@ const CatContainer = ({ ns, title, hidden = "xs:hidden sm:hidden md:hidden lg:hi
 						/>
 					</svg>
 				</button>
-
-				{search && <img onClick={handleSearch} src="/assets/leftarrow.svg" alt="" />}
 				<p className="mx-auto text-sm text-black w-50">{title}</p>
 				<button onClick={handleSearch}>
 					<SearchIcon height="22" color="stroke-white" />
