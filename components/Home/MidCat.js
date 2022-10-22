@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import MidCard from "./Component/MidCard";
 import { midCats } from "./InitialMidCats";
 const MidCat = () => {
-	const language = useSelector((state) => state.globalData.language);
+	const { language } = useSelector((state) => state.globalData.settings);
 	return (
 		<div className="xs:px-4 xs:absolute xs:top-60 xs:left-0 xs:w-full sm:px-4 sm:absolute sm:left-0 sm:top-60 sm:w-full">
 			<div
@@ -37,11 +37,6 @@ const MidCat = () => {
 						/>
 					);
 				})}
-				{/* <MidCard path={"/blog"} text={"Blog"} midCard={"xs:flex-col xs:gap-3 sm:flex-col sm:gap-3"} />
-				<MidCard path={"/ruqyah"} text={"Ruqyah"} midCard={"xs:flex-col xs:gap-3 sm:flex-col sm:gap-3"} />
-				<MidCard path={"/#"} text={""} />
-				<MidCard path={"/#"} text={""} />
-				<MidCard path={"/dua-audio"} text={"Dua Audio"} midCard={"xs:flex-col xs:gap-3 sm:flex-col sm:gap-3"} /> */}
 			</div>
 		</div>
 	);

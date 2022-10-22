@@ -6,7 +6,7 @@ import Card from "../Utils/Card";
 
 const CatList = () => {
 	const data = useSelector((state) => state.duaCat.data);
-	const language = useSelector((state) => state.globalData.language);
+	const { language } = useSelector((state) => state.globalData.settings);
 	const [duaCategory, setDuaCategory] = useState([]);
 
 	useEffect(() => {

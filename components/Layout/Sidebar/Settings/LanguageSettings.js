@@ -1,16 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setLanguage } from "../../../../dataStore/feature/GlobalDataSlicer";
+import { setSetting } from "../../../../dataStore/feature/GlobalDataSlicer";
 const LanguageSettings = () => {
-	// const [language, setLanguage] = useState();
 	const dispatch = useDispatch();
-	const language = useSelector((state) => state.globalData.language);
-	console.log(language);
+	const { language } = useSelector((state) => state.globalData.settings);
 
 	return (
 		<div className={`py-6  animate-scale-down`}>
 			<div className="flex flex-row justify-center mx-4 gap-x-3 animate-scale-down">
 				<button
-					onClick={() => dispatch(setLanguage("en"))}
+					onClick={() => dispatch(setSetting({ name: "language", value: "en" }))}
 					className={
 						language === "en"
 							? "bg-blue-400 btn drop-shadow-  w-29 h-10 text-ms "
@@ -19,7 +17,7 @@ const LanguageSettings = () => {
 					English
 				</button>
 				<button
-					onClick={() => dispatch(setLanguage("bn"))}
+					onClick={() => dispatch(setSetting({ name: "language", value: "bn" }))}
 					className={
 						language === "bn"
 							? "bg-blue-400 btn drop-shadow-  w-29 h-10 text-ms "
