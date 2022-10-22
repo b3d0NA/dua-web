@@ -3,10 +3,11 @@ import SearchIcon from "../../assets/searchIcon";
 import SearchBox from "../Widget/SearchBox";
 import CatList from "./CategoryList/CatList";
 
+import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-
 const CatContainer = ({ ns, title, hidden = "xs:hidden sm:hidden md:hidden lg:hidden" }) => {
 	const [search, setSearch] = useState(false);
+	const router = useRouter();
 	const data = useSelector((state) => state.duaCat.data);
 	const { language } = useSelector((state) => state.globalData.settings);
 
@@ -18,6 +19,16 @@ const CatContainer = ({ ns, title, hidden = "xs:hidden sm:hidden md:hidden lg:hi
 	return (
 		<div className={`h-[85.5vh] overflow-hidden bg-red-100 rounded-2lg  dark:bg-[#223449] ${hidden} xs:h-[100vh] sm:h-[50vh]`}>
 			<div className="flex flex-row items-center justify-center px-5 rounded-t-2lg h-14">
+				<button onClick={() => router.push("/")}>
+					<svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+						<path
+							fillRule="evenodd"
+							d="M7.72 12.53a.75.75 0 010-1.06l7.5-7.5a.75.75 0 111.06 1.06L9.31 12l6.97 6.97a.75.75 0 11-1.06 1.06l-7.5-7.5z"
+							clipRule="evenodd"
+						/>
+					</svg>
+				</button>
+
 				{search && <img onClick={handleSearch} src="/assets/leftarrow.svg" alt="" />}
 				<p className="mx-auto text-sm text-black w-50">{title}</p>
 				<button onClick={handleSearch}>
@@ -28,7 +39,7 @@ const CatContainer = ({ ns, title, hidden = "xs:hidden sm:hidden md:hidden lg:hi
 				{search && (
 					<div className="mx-3 mt-5">
 						<SearchBox hint={`${"Search " + title}`} />
-						<p className="mt-4 text-sm  text-start">Search Results:</p>
+						<p className="mt-4 text-sm text-start">Search Results:</p>
 					</div>
 				)}
 				{data &&
