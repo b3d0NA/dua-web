@@ -3,6 +3,7 @@ import SubCatText from "../Ui/SubCatText";
 
 const SubCatList = (props) => {
 	const data = useSelector((state) => state.subCat.data);
+	const { language } = useSelector((state) => state.globalData.settings);
 
 	return (
 		<div className="my-2 ml-12 border-l-2 border-dotted border-">
@@ -12,7 +13,13 @@ const SubCatList = (props) => {
 						?.filter((filterItem) => {
 							return filterItem.cat_id === props.catId;
 						})
-						.map((item) => <SubCatText catId={item.cat_id} subCatId={item.subcat_id} text={item.subcat_name_en} />)}
+						.map((item) => (
+							<SubCatText
+								catId={item.cat_id}
+								subCatId={item.subcat_id}
+								text={language === "en" ? item.subcat_name_en : item.subcat_name_bn}
+							/>
+						))}
 			</div>
 		</div>
 	);

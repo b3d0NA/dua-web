@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import getDigitBanglaFromEnglish from "../../../dataStore/functions/englishToBangla";
 import DuaBottomBar from "./DuaBottomBar";
 import DuaTopbar from "./DuaTopbar";
 
@@ -29,7 +30,10 @@ const DuaCard = ({ dua }) => {
 	return (
 		<div id={`${dua[0].dua_id}`} className="bg-red-100 rounded-2lg my-5 dark:bg-[#223449]">
 			<div className="p-6">
-				<DuaTopbar duaName={language === "en" ? dua[0].dua_name_en : dua[0].dua_name_bn} duaId={dua[0].dua_id} />
+				<DuaTopbar
+					duaName={language === "en" ? dua[0].dua_name_en : dua[0].dua_name_bn}
+					duaId={language === "en" ? dua[0].dua_id : getDigitBanglaFromEnglish(dua[0].dua_id.toString())}
+				/>
 				<div className={`flex flex-col justify-start items-start  ${animation && "animate-fade-in-up"}`}>
 					{dua.map(function (item, index) {
 						return (
