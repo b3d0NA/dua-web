@@ -81,7 +81,7 @@ const DuaBottomBar = (props) => {
 				customStyles={{ backgroundColor: "transparent", boxShadow: "none" }}
 				visible={planShow}
 				onClose={() => setPlanShow(false)}>
-				<PlanPopup onClose={() => setPlanShow(false)} />
+				<PlanPopup dua={props.dua} onClose={() => setPlanShow(false)} />
 			</Rodal>
 			<Rodal
 				showCloseButton={false}

@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import getDigitBanglaFromEnglish from "../../../dataStore/functions/englishToBangla";
 import DuaBottomBar from "./DuaBottomBar";
@@ -6,25 +7,26 @@ import DuaTopbar from "./DuaTopbar";
 
 const DuaCard = ({ dua }) => {
 	const [animation, setAnimation] = useState(false);
+	const { query } = useRouter();
+	const duaCard = useRef();
 
 	const { language, showArabic, showTranslation, showTransliteration, showReference, translationFont, arabicScript, arabicFont, arabicFontSize } =
 		useSelector((state) => state.globalData.settings);
 
-	useEffect(
-		() => {
-			return () => {
-				setAnimation(true);
-			};
-		},
-		[dua[0].dua_id],
-		showArabic,
-		showTranslation,
-		showTransliteration,
-		showReference
-	);
+	useEffect(() => {
+		return () => {
+			setAnimation(true);
+		};
+	}, [dua[0].dua_id, showArabic, showTranslation, showTransliteration, showReference]);
+
+	useEffect(() => {
+		if (parseInt(query.dua_id) === parseInt(dua[0].dua_id)) {
+			duaCard.current.scrollIntoView(true);
+		}
+	}, [query.dua_id, dua]);
 
 	return (
-		<div id={`${dua[0].dua_id}`} className="bg-red-100 rounded-2lg my-5 dark:bg-[#223449]">
+		<div ref={duaCard} className="bg-red-100 rounded-2lg my-5 dark:bg-[#223449]">
 			<div className="p-6">
 				<DuaTopbar
 					duaName={language === "en" ? dua[0].dua_name_en : dua[0].dua_name_bn}
@@ -100,7 +102,7 @@ const DuaCard = ({ dua }) => {
 					)}
 				</div>
 			</div>
-			<DuaBottomBar language={language} audio={dua[0].audio} />
+			<DuaBottomBar language={language} audio={dua[0].audio} dua={dua} />
 		</div>
 	);
 };

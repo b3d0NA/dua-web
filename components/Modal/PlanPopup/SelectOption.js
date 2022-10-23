@@ -1,22 +1,13 @@
 import { Listbox, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
-
-const subject = [
-	{ name: "Feature Request" },
-	{ name: "Bug Report" },
-	{ name: "Pertnership/Collaboration" },
-	{ name: "Volunteering" },
-	{ name: "Other" },
-];
-
-export default function SelectOption({ title }) {
-	const [selected, setSelected] = useState(subject[0]);
+import _ from "lodash";
+import { Fragment } from "react";
+export default function SelectOption({ title, subject, selected, setSelected }) {
 	return (
 		<div className="mb-3">
 			<div className="block mb-2 text-base font-medium text-left capitalize font-inter text-title ">{title}</div>
 			<div className="">
 				<div className="w-full">
-					<Listbox disabled={subject.length === 0} value={selected} onChange={setSelected}>
+					<Listbox disabled={_.isEmpty(subject)} value={selected} onChange={setSelected}>
 						<div className="relative">
 							<Listbox.Button className="relative w-full cursor-default bg-red-100 text-left focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm focus:outline-none focus:ring-1 focus:ring- px-6 py-[1.125rem] border border-solid   dark:border-none dark:focus:ring-1 dark:focus:ring-">
 								<span className="block truncate">{selected?.name}</span>
@@ -24,7 +15,7 @@ export default function SelectOption({ title }) {
 							</Listbox.Button>
 							<Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
 								<Listbox.Options className="absolute z-10 w-full py-1 mt-1 overflow-auto text-base text-left bg-red-100 shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-									{subject.map((person, personIdx) => (
+									{Object.values(subject).map((person, personIdx) => (
 										<Listbox.Option
 											key={personIdx}
 											className={({ active }) =>

@@ -1,17 +1,17 @@
 import axios from "axios";
 import PUrls from "./urls";
 
+import { setData, setLoading } from "../feature/SearchSlicer";
 import { store } from "../store";
-import { setLoading, setData } from "../feature/SearchSlicer";
 
 export default class SearchApi {
-  static duaSearch = async (query, lang) => {
-    const res = await axios.post(PUrls.duaSearch + lang, query).catch((error) => console.log("Error: ", error));
+	static duaSearch = async (query, lang) => {
+		store.dispatch(setLoading());
+		const res = await axios.post(PUrls.duaSearch + lang, query).catch((error) => console.log("Error: ", error));
 
-    try {
-      store.dispatch(setLoading());
-
-      store.dispatch(setData(res.data));
-    } catch (_) {}
-  };
+		try {
+			store.dispatch(setData(res.data));
+			store.dispatch(setLoading());
+		} catch (_) {}
+	};
 }
