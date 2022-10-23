@@ -17,15 +17,21 @@ const DuaBottomBar = (props) => {
 		<div className="">
 			<div className="w-full h-[1px] mt-5 bg-[#E2E2E2] dark: dark:hidden"></div>
 			<div className="flex flex-row justify-between px-6">
-				<div className="py-4 ">{props.language === "en" ? "Play: " : "শুনুনঃ "}</div>
-				{props.audio !== null && (
-					<audio controls>
-						<source src={props.audio} type="audio/mpeg" />
-					</audio>
+				{props.audio !== null ? (
+					<>
+						<div className="py-4 ">{props.language === "en" ? "Play: " : "শুনুনঃ "}</div>
+						<audio controls>
+							<source src={props.audio} type="audio/mpeg" />
+						</audio>
+					</>
+				) : (
+					<div></div>
 				)}
 
 				<div className="flex flex-row py-6 gap-x-8 xs:gap-x-4">
-					{theme === "dark" ? <img src="/assets/others/dark/copy.svg" alt="" /> : <img src="/assets/others/copy.svg" alt="" />}
+					<button type="button" title="Copy">
+						{theme === "dark" ? <img src="/assets/others/dark/copy.svg" alt="" /> : <img src="/assets/others/copy.svg" alt="" />}
+					</button>
 					<button
 						type="button"
 						onClick={() => setBookmark(true)}

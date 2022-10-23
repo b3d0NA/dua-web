@@ -33,7 +33,7 @@ const CatContainer = ({ ns, title, hidden = "xs:hidden sm:hidden md:hidden lg:hi
 					<SearchIcon height="22" color="stroke-white" />
 				</button>
 			</div>
-			<div className="mt-6 scrl h-[calc(100vh_-_200px)] pb-8 xs:h-[calc(100vh_-_40vh)] sm:h-[calc(100vh_-_40vh)]">
+			<div className="mt-6 scrl h-[calc(100vh_-_200px)] pb-8 xs:h-[calc(100vh_-_40vh)] sm:h-[calc(100vh_-_40vh)] scroll-smooth">
 				{search && (
 					<div className="mx-3 mt-5">
 						<SearchBox hint={`${"Search " + title}`} />
@@ -41,9 +41,10 @@ const CatContainer = ({ ns, title, hidden = "xs:hidden sm:hidden md:hidden lg:hi
 					</div>
 				)}
 				{data &&
-					data?.result?.map((item) => (
+					data?.result?.map((item, index) => (
 						<CatList
-							isOpen={item.cat_id == 1 ? true : false}
+							key={index}
+							isOpen={parseInt(item.cat_id) === parseInt(router.query.cat_id) ? true : false}
 							catId={item.cat_id}
 							catName={language === "en" ? item.cat_name_en : item.cat_name_bn}
 							subCat={item.no_of_subcat}

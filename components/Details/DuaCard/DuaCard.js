@@ -6,10 +6,6 @@ import DuaTopbar from "./DuaTopbar";
 
 const DuaCard = ({ dua }) => {
 	const [animation, setAnimation] = useState(false);
-	// const isArabic = JSON.parse(localStorage.getItem("showArabic"));
-	// const isTranslation = JSON.parse(localStorage.getItem("showTranslation"));
-	// const isTransliteration = JSON.parse(localStorage.getItem("showTransliteration"));
-	// const isRefference = JSON.parse(localStorage.getItem("showRefference"));
 
 	const { language, showArabic, showTranslation, showTransliteration, showReference, translationFont, arabicScript, arabicFont, arabicFontSize } =
 		useSelector((state) => state.globalData.settings);
@@ -37,7 +33,7 @@ const DuaCard = ({ dua }) => {
 				<div className={`flex flex-col justify-start items-start  ${animation && "animate-fade-in-up"}`}>
 					{dua.map(function (item, index) {
 						return (
-							<div className="w-full">
+							<div key={index} className="w-full">
 								{/* Body */}
 								{dua[index].top_en !== null && language === "en" && (
 									<p className="my-5 font-normal text-justify text-title font-inter">{dua[index].top_en}</p>

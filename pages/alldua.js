@@ -46,7 +46,7 @@ const AllDua = () => {
 									return (
 										<NumCard
 											key={index}
-											link={"/" + dua.cat_id + "/" + dua.dua_id}
+											link={"/dua/" + dua.cat_id + "/" + dua.dua_id}
 											title={language === "en" ? dua.dua_name_en && dua.dua_name_en : dua.dua_name_bn && dua.dua_name_bn}
 											text={duaBucket.group}
 										/>
