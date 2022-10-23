@@ -1,47 +1,14 @@
 import React from "react";
-import PouUpAlpha from "./PouUpAlpha";
+import PopuUpAlpha from "./PouUpAlpha";
 
-function PopUpContent() {
-  return (
-    <div className="">
-      <div className="mt-4 mb-4 flex justify-center">
-        <PouUpAlpha alpha={"A"} />
-        <PouUpAlpha alpha={"A"} />
-        <PouUpAlpha alpha={"A"} />
-        <PouUpAlpha alpha={"A"} />
-        <PouUpAlpha alpha={"A"} />
-      </div>
-      <div className="mt-4 mb-4 flex justify-center">
-        <PouUpAlpha alpha={"A"} />
-        <PouUpAlpha alpha={"A"} />
-        <PouUpAlpha alpha={"A"} />
-        <PouUpAlpha alpha={"A"} />
-        <PouUpAlpha alpha={"A"} />
-      </div>
-      <div className="mt-4 mb-4 flex justify-center">
-        <PouUpAlpha alpha={"A"} />
-        <PouUpAlpha alpha={"A"} />
-        <PouUpAlpha alpha={"A"} />
-        <PouUpAlpha alpha={"A"} />
-        <PouUpAlpha alpha={"A"} />
-      </div>
-      <div className="mt-4 mb-4 flex justify-center">
-        <PouUpAlpha alpha={"A"} />
-        <PouUpAlpha alpha={"A"} />
-        <PouUpAlpha alpha={"A"} />
-        <PouUpAlpha alpha={"A"} />
-        <PouUpAlpha alpha={"A"} />
-      </div>
-      <div className="mt-4 mb-4 flex justify-center">
-        <PouUpAlpha alpha={"A"} />
-        <PouUpAlpha alpha={"A"} />
-        <PouUpAlpha alpha={"A"} />
-        <PouUpAlpha alpha={"A"} />
-        <PouUpAlpha alpha={"A"} />
-      </div>
-      
-    </div>
-  );
+function PopUpContent({ duas, onClose }) {
+	return (
+		<div className="flex flex-wrap items-center justify-center m-auto space-x-2 space-y-2 w-96">
+			{duas.map((dua) => {
+				return <PopuUpAlpha onClose={onClose} key={dua.group} alpha={dua.group} />;
+			})}
+		</div>
+	);
 }
 
 export default PopUpContent;
