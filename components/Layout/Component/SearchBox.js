@@ -1,11 +1,10 @@
 import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import SearchIcon from "../../../assets/searchIcon";
-import SearchApi from "../../../dataStore/api/SearchApi";
 import InfoPopup from "./InfoPopup/InfoPopup";
 
 const SearchBox = ({ hint }) => {
@@ -18,16 +17,23 @@ const SearchBox = ({ hint }) => {
 	const data = useSelector((state) => state.duaSearch.data);
 
 	// useState
-	const [isEnter, setEnter] = useState("");
+	const [, setEnter] = useState("");
 
-	useEffect(() => {
-		SearchApi.duaSearch(searchText, language === "en" ? "en" : "bn");
-	}, [searchText, isEnter, language]);
+	function submitSearch(e) {
+		e.preventDefault();
+		router.push(
+			{
+				pathname: "/search",
+				query: { search: searchText.text },
+			},
+			"/search"
+		);
+	}
 
 	return (
 		<>
 			<div className="relative flex flex-row items-center">
-				<form onSubmit={(e) => e.preventDefault()} action="">
+				<form onSubmit={submitSearch} action="">
 					<div className="relative mr-8 w-82">
 						<div className="relative flex justify-between">
 							<span className="absolute inset-y-0 left-0 flex items-center pl-4">
@@ -38,9 +44,9 @@ const SearchBox = ({ hint }) => {
 								)}
 							</span>
 							<input
-								onKeyDown={(e) => setEnter(e.key === "Enter" ? setSearchText({ text: e.target.value }, router.push("/search")) : "")}
+								onChange={(e) => setSearchText({ text: e.target.value })}
 								className="placeholder:text-mute-grey dark:placeholder:text-[#96a2b4] block placeholder:font-inter placeholder:text-sm bg-red-100 w-full  py-3 pl-12 pr-3 shadow-sm focus:outline-none focus:border- focus:ring- focus:ring-1 sm:text-sm dark:bg-[#223449] dark:placeholder:opacity-[.6]"
-								placeholder={hint ?? "Search by Dua Name"}
+								placeholder={hint ?? language === "en" ? "Search by Dua Name English" : "বাংলায় দুয়ার নাম লিখে খুঁজুন"}
 								type="text"
 								name="search"
 							/>
