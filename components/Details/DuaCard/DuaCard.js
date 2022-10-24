@@ -25,6 +25,10 @@ const DuaCard = ({ dua }) => {
 		}
 	}, [query.dua_id, dua]);
 
+	function copyDua() {
+		navigator.clipboard.writeText(duaCard.current.innerText);
+	}
+
 	return (
 		<div ref={duaCard} className="bg-red-100 rounded-2lg my-5 dark:bg-[#223449]">
 			<div className="p-6">
@@ -102,7 +106,7 @@ const DuaCard = ({ dua }) => {
 					)}
 				</div>
 			</div>
-			<DuaBottomBar language={language} audio={dua[0].audio} dua={dua} />
+			<DuaBottomBar copyDua={copyDua} language={language} audio={dua[0].audio} dua={dua} />
 		</div>
 	);
 };

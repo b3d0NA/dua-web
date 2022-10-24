@@ -18,7 +18,7 @@ const CatList = (props) => {
 
 	useEffect(() => {
 		if (props.isOpen) {
-			catRef.current.scrollIntoView(true);
+			catRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
 		}
 	}, [props.catId, catRef, props.isOpen]);
 

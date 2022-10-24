@@ -29,7 +29,7 @@ const DuaBottomBar = (props) => {
 				)}
 
 				<div className="flex flex-row py-6 gap-x-8 xs:gap-x-4">
-					<button type="button" title="Copy">
+					<button onClick={props.copyDua} type="button" title="Copy">
 						{theme === "dark" ? <img src="/assets/others/dark/copy.svg" alt="" /> : <img src="/assets/others/copy.svg" alt="" />}
 					</button>
 					<button

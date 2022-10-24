@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CatContainer from "../../../components/Details/CatContainer";
 import DuaCard from "../../../components/Details/DuaCard/DuaCard";
-import SectionCard from "../../../components/Details/DuaCard/SectionCard";
 import DuaContainer from "../../../components/Details/DuaContainer";
 import Master from "../../../components/Layout/Master";
 import DuaCatApi from "../../../dataStore/api/DuaCatApi";
@@ -81,7 +80,7 @@ const DuaDetails = () => {
 				</svg>
 			) : (
 				<DuaContainer ns={true}>
-					<SectionCard text="The servant is dependent on his Lord" />
+					{/* <SectionCard text="The servant is dependent on his Lord" /> */}
 					{sameIDDuasGrouped && sameIDDuasGrouped?.map((item, index) => <DuaCard key={index} dua={item} />)}
 				</DuaContainer>
 			)}

@@ -5,6 +5,7 @@ import "rodal/lib/rodal.css";
 import Master from "../components/Layout/Master";
 import DuaPopup from "../components/Modal/DuaPopup/DuaPopup";
 import NumCard from "../components/Utils/NumCard";
+import SearchApi from "../dataStore/api/SearchApi";
 
 const AllDua = () => {
 	const duasBag = useSelector((state) => state.duaSearch.data?.result);
@@ -27,6 +28,10 @@ const AllDua = () => {
 			setDuasBucket(Object.values(duas).sort((a, b) => a.group?.localeCompare(b.group)));
 		}
 	}, [duasBag, language]);
+
+	useEffect(() => {
+		SearchApi.duaSearch({ text: "" }, language === "en" ? "en" : "bn");
+	}, [language]);
 	return (
 		<Master title={language === "en" ? "All Dua" : "সব দুয়া"}>
 			{loading ? (
