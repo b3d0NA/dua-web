@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import BookDetailsSlicer from "./feature/BookDetailsSlicer";
+import BookmarkSlicer from "./feature/BookmarkSlicer";
 import BookSlicer from "./feature/BookSlicer";
 import DrawerSlicer from "./feature/DrawerSlicer";
 import DuaCatSlicer from "./feature/DuaCatSlicer";
@@ -30,5 +31,6 @@ export const store = configureStore({
 		duaSearch: SearchSlicer,
 		globalData: GlobalDataSlicer,
 		memorization: MemorizationSlicer,
+		bookmark: BookmarkSlicer,
 	},
 });

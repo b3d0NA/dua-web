@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateSelection } from "../../../dataStore/feature/MemorizationSlicer";
+import { deleteDua, updateSelection } from "../../../dataStore/feature/MemorizationSlicer";
 import Botombar from "./Botombar";
 import TopBar from "./TopBar";
 
@@ -11,6 +11,8 @@ const DetailsCard = ({ dua, plan }) => {
 		useSelector((state) => state.globalData.settings);
 
 	const dispatch = useDispatch();
+
+	const memDua = useRef();
 
 	useEffect(
 		() => {
@@ -29,6 +31,14 @@ const DetailsCard = ({ dua, plan }) => {
 		dispatch(updateSelection({ plan, dua_id: dua[0].dua_id }));
 	}
 
+	function copyDua() {
+		navigator.clipboard.writeText(memDua.current.innerText);
+	}
+
+	function deleteFromPlan() {
+		dispatch(deleteDua({ plan, dua_id: dua[0].dua_id }));
+	}
+
 	return (
 		<div className="bg-red-100 rounded-2lg mb-5 dark:bg-[#223449]">
 			<div className="p-6">
@@ -37,7 +47,7 @@ const DetailsCard = ({ dua, plan }) => {
 					isSelected={dua[0].isSelected}
 					duaName={language === "en" ? dua[0].dua_name_en : dua[0].dua_name_bn}
 				/>
-				<div className={`flex flex-col justify-start items-start  ${animation && "animate-fade-in-up"}`}>
+				<div ref={memDua} className={`flex flex-col justify-start items-start  ${animation && "animate-fade-in-up"}`}>
 					{dua.map(function (item, index) {
 						return (
 							<div key={index} className="w-full">
@@ -107,7 +117,7 @@ const DetailsCard = ({ dua, plan }) => {
 					)}
 				</div>
 			</div>
-			<Botombar />
+			<Botombar audio={dua[0].audio} duaLink={`/dua/${dua[0].cat_id}/${dua[0].dua_id}`} deleteDua={deleteFromPlan} plan={plan} copy={copyDua} />
 		</div>
 	);
 };

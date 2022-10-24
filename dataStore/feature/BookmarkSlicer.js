@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import _ from "lodash";
-export const memorizationSlicer = createSlice({
-	name: "memorization",
+export const bookmarkSlicer = createSlice({
+	name: "bookmark",
 	initialState: {
 		plans: {},
 	},
@@ -44,6 +44,6 @@ export const memorizationSlicer = createSlice({
 	},
 });
 
-export const { setPlans, addPlan, addDua, updateSelection, deleteDua, updatePlan } = memorizationSlicer.actions;
+export const { setPlans, addPlan, addDua, updateSelection, deleteDua, updatePlan } = bookmarkSlicer.actions;
 
-export default memorizationSlicer.reducer;
+export default bookmarkSlicer.reducer;
