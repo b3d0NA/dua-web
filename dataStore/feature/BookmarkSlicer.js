@@ -3,47 +3,42 @@ import _ from "lodash";
 export const bookmarkSlicer = createSlice({
 	name: "bookmark",
 	initialState: {
-		plans: {},
+		bookmarks: {},
 	},
 	reducers: {
-		setPlans: (state, action) => {
-			state.plans = action.payload;
+		setBookmarks: (state, action) => {
+			state.bookmarks = action.payload;
 		},
-		addPlan: (state, { payload }) => {
-			state.plans[payload.name] = { plan: payload.name, day: parseInt(payload.day), duas: [], created_at: new Date().toString() };
-			localStorage.setItem("memorizations", JSON.stringify(state.plans));
+		addBookmark: (state, { payload }) => {
+			state.bookmarks[payload.name] = { bookmark: payload.name, color: payload.color, duas: [] };
+			localStorage.setItem("bookmarks", JSON.stringify(state.bookmarks));
 		},
 		addDua: (state, { payload }) => {
 			const dua = _.cloneDeep(payload.dua);
-			dua[0].isSelected = false;
-			state.plans[payload.plan].duas.push(dua);
-			localStorage.setItem("memorizations", JSON.stringify(state.plans));
+			state.bookmarks[payload.bookmark].duas.push(dua);
+			localStorage.setItem("bookmarks", JSON.stringify(state.bookmarks));
 		},
-		updatePlan: (state, { payload }) => {
-			const clonedPlan = _.cloneDeep(state.plans[payload.oldName]);
-			state.plans[payload.name] = { plan: payload.name, day: parseInt(payload.day), duas: clonedPlan.duas, created_at: new Date().toString() };
-			delete state.plans[payload.oldName];
-			localStorage.setItem("memorizations", JSON.stringify(state.plans));
-		},
-		updateSelection: (state, { payload }) => {
-			state.plans[payload.plan].duas.map((dua) => {
-				if (parseInt(payload.dua_id) === parseInt(dua[0].dua_id)) {
-					return (dua[0].isSelected = !dua[0].isSelected);
-				}
-				return "";
-			});
-			localStorage.setItem("memorizations", JSON.stringify(state.plans));
+		updateBookmark: (state, { payload }) => {
+			if (payload.oldName !== payload.name) {
+				const clonedBookmark = _.cloneDeep(state.bookmarks[payload.oldName]);
+				state.bookmarks[payload.name] = { bookmark: payload.name, color: payload.color, duas: clonedBookmark.duas };
+				delete state.bookmarks[payload.oldName];
+			} else {
+				state.bookmarks[payload.name].color = payload.color;
+			}
+
+			localStorage.setItem("bookmarks", JSON.stringify(state.bookmarks));
 		},
 		deleteDua: (state, { payload }) => {
-			const duasExceptDeleted = state.plans[payload.plan].duas.filter((dua) => {
+			const duasExceptDeleted = state.bookmarks[payload.bookmark].duas.filter((dua) => {
 				return parseInt(dua[0].dua_id) !== parseInt(payload.dua_id);
 			});
-			state.plans[payload.plan].duas = duasExceptDeleted;
-			localStorage.setItem("memorizations", JSON.stringify(state.plans));
+			state.bookmarks[payload.bookmark].duas = duasExceptDeleted;
+			localStorage.setItem("bookmarks", JSON.stringify(state.bookmarks));
 		},
 	},
 });
 
-export const { setPlans, addPlan, addDua, updateSelection, deleteDua, updatePlan } = bookmarkSlicer.actions;
+export const { setBookmarks, addBookmark, addDua, updateBookmark, deleteDua } = bookmarkSlicer.actions;
 
 export default bookmarkSlicer.reducer;

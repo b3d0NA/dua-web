@@ -9,8 +9,9 @@ export default function DuaList(props) {
 	return (
 		<div className="mt-2 cursor-pointer">
 			{selectedDua &&
-				dua?.map((item) => (
+				dua?.map((item, index) => (
 					<DuaText
+						key={index}
 						catId={item.cat_id}
 						subCatId={item.subcat_id}
 						duaId={item.dua_id}

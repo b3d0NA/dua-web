@@ -3,7 +3,6 @@ const RangeSlider = ({ style, child, preChild, mt = "mt-2", trackProgress, max, 
 		<div className={`${mt} flex flex-row items-center w-[85%]`}>
 			{preChild && <div className="ml-2 text-sm text-mute-grey-200">{preChild}</div>}
 			<input
-				min={0}
 				max={max}
 				value={trackProgress}
 				onMouseUp={onScrubEnd}

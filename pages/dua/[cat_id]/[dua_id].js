@@ -8,6 +8,7 @@ import DuaContainer from "../../../components/Details/DuaContainer";
 import Master from "../../../components/Layout/Master";
 import DuaCatApi from "../../../dataStore/api/DuaCatApi";
 import SubCatApi from "../../../dataStore/api/SubCatApi";
+import { setBookmarks } from "../../../dataStore/feature/BookmarkSlicer";
 import { setPlans } from "../../../dataStore/feature/MemorizationSlicer";
 import isValidJson from "../../../dataStore/functions/isValidJson";
 
@@ -15,6 +16,7 @@ const DuaDetails = () => {
 	const selectedDua = useSelector((state) => state.subCat.allDuaOfCatID);
 	const loading = useSelector((state) => state.subCat.loading);
 	const { plans } = useSelector((state) => state.memorization);
+	const { bookmarks } = useSelector((state) => state.bookmark);
 	const dispatch = useDispatch();
 	var flattenAllDuas = selectedDua?.flat();
 	let sameIDDuasGrouped = [];
@@ -47,9 +49,22 @@ const DuaDetails = () => {
 	}, [plans]);
 
 	useEffect(() => {
+		if (!localStorage.getItem("bookmarks")) {
+			localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+		}
+	}, [bookmarks]);
+
+	useEffect(() => {
 		if (localStorage.getItem("memorizations") && isValidJson(localStorage.getItem("memorizations"))) {
 			const localMemorizations = localStorage.getItem("memorizations");
 			dispatch(setPlans(JSON.parse(localMemorizations)));
+		}
+	}, [dispatch]);
+
+	useEffect(() => {
+		if (localStorage.getItem("bookmarks") && isValidJson(localStorage.getItem("bookmarks"))) {
+			const localBookmarks = localStorage.getItem("bookmarks");
+			dispatch(setBookmarks(JSON.parse(localBookmarks)));
 		}
 	}, [dispatch]);
 

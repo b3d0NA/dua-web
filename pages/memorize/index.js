@@ -26,7 +26,7 @@ const MyApp = () => {
 								return dua[0]?.isSelected;
 							}).length;
 
-							const maxDate = new Date(plan.created_at).getDate() + plan.day;
+							const maxDate = parseInt(new Date(plan.created_at).getDate()) + parseInt(plan.day);
 							const remaining = maxDate - new Date().getDate();
 							return (
 								<Card

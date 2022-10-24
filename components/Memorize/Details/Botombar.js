@@ -21,8 +21,6 @@ const Botombar = ({ copy, plan, deleteDua, duaLink, audio }) => {
 
 	const { duration } = audioRef.current;
 
-	const currentPercentage = duration ? `${(trackProgress / duration) * 100}%` : "0%";
-
 	const startTimer = () => {
 		// Clear any timers already running
 		clearInterval(intervalRef.current);
@@ -31,7 +29,7 @@ const Botombar = ({ copy, plan, deleteDua, duaLink, audio }) => {
 			if (audioRef.current.ended) {
 				setPlay("pause");
 			} else {
-				setTrackProgress(audioRef.current.currentTime);
+				setTrackProgress(audioRef.current.currentTime + 1);
 			}
 		}, [1000]);
 	};
@@ -40,7 +38,7 @@ const Botombar = ({ copy, plan, deleteDua, duaLink, audio }) => {
 		// Clear any timers already running
 		clearInterval(intervalRef.current);
 		audioRef.current.currentTime = value;
-		setTrackProgress(audioRef.current.currentTime);
+		setTrackProgress(audioRef.current.currentTime + 1);
 	};
 
 	const onScrubEnd = () => {
@@ -64,7 +62,7 @@ const Botombar = ({ copy, plan, deleteDua, duaLink, audio }) => {
 		audioRef.current.pause();
 
 		audioRef.current = new Audio(audio);
-		setTrackProgress(audioRef.current.currentTime);
+		setTrackProgress(audioRef.current.currentTime + 1);
 
 		if (!isReady.current) {
 			isReady.current = true;
@@ -122,7 +120,7 @@ const Botombar = ({ copy, plan, deleteDua, duaLink, audio }) => {
 						}`}
 						preChild={
 							<p className={`font-poppins font-normal text-sm leading-6 text-title  ${hidden}`}>
-								{formatTime(audioRef.current.currentTime)}
+								{formatTime(audioRef.current.currentTime + 1)}
 							</p>
 						}
 						child={

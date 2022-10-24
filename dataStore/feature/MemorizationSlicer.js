@@ -20,9 +20,19 @@ export const memorizationSlicer = createSlice({
 			localStorage.setItem("memorizations", JSON.stringify(state.plans));
 		},
 		updatePlan: (state, { payload }) => {
-			const clonedPlan = _.cloneDeep(state.plans[payload.oldName]);
-			state.plans[payload.name] = { plan: payload.name, day: parseInt(payload.day), duas: clonedPlan.duas, created_at: new Date().toString() };
-			delete state.plans[payload.oldName];
+			if (payload.oldName !== payload.name) {
+				const clonedPlan = _.cloneDeep(state.plans[payload.oldName]);
+				state.plans[payload.name] = {
+					plan: payload.name,
+					day: parseInt(payload.day),
+					duas: clonedPlan.duas,
+					created_at: new Date().toString(),
+				};
+				delete state.plans[payload.oldName];
+			} else {
+				state.plans[payload.name].day = payload.day;
+				state.plans[payload.name].created_at = new Date().toString();
+			}
 			localStorage.setItem("memorizations", JSON.stringify(state.plans));
 		},
 		updateSelection: (state, { payload }) => {

@@ -24,20 +24,21 @@ function FolderName({ name, setName, day, setDay }) {
 					/>
 				</div>
 			</label>
+
 			<label className="block">
 				<div className="mb-5">
-					<span className="block mb-3 text-base font-medium text-left font-inter text-title ">Estimated Days</span>
+					<span className="block mb-3 text-base font-medium text-left font-inter text-title ">Estimate Day</span>
 
 					<input
 						onChange={(e) => setDay(e.target.value)}
 						className="w-full h-12 px-4 py-4 border border-solid   placeholder:font-inter placeholder:font-normal placeholder:text-sm placeholder:text-title placeholder:opacity-[.35] focus:outline-none focus:ring-1 
             focus:ring- dark:border-none dark:bg-[#223449] dark:placeholder:text-[#fff]  "
 						type="number"
-						max={30}
 						min={1}
-						name="folder"
+						max={30}
 						value={day}
-						placeholder="Input approximate date here"
+						name="folder"
+						placeholder="Estimated days"
 					/>
 				</div>
 			</label>
