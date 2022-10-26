@@ -25,9 +25,7 @@ function PopupCont({ onClose, dua }) {
 			if (!name && !day && selected) {
 				dispatch(addDua({ plan: selected.name, dua: dua }));
 				onClose();
-			}
-		} else if (!_.isEmpty(subject)) {
-			if (name && day) {
+			} else if (name && day && selected) {
 				dispatch(addPlan({ name, day }));
 				dispatch(addDua({ plan: name, dua: dua }));
 				onClose();

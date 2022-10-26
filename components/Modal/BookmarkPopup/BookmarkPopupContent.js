@@ -25,9 +25,7 @@ function BookmarkPopupContent({ onClose, dua }) {
 			if (!name && selected) {
 				dispatch(addDua({ bookmark: selected.name, dua: dua }));
 				onClose();
-			}
-		} else if (!_.isEmpty(subject)) {
-			if (name) {
+			} else if (name && selected) {
 				dispatch(addBookmark({ name, color }));
 				dispatch(addDua({ bookmark: name, dua: dua }));
 				onClose();
