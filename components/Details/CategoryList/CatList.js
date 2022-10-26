@@ -23,7 +23,7 @@ const CatList = (props) => {
 	}, [props.catId, catRef, isOpen]);
 
 	return (
-		<div className="group" ref={catRef}>
+		<div className="group scroll-mx-10" ref={catRef}>
 			<button onClick={handleClick}>
 				<div className="flex items-center justify-between mx-3 bg-red-100 dark:bg-transparent">
 					<div className="flex flex-row items-center justify-between w-full px-3 h-18 ">

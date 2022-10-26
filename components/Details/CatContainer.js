@@ -24,7 +24,7 @@ const CatContainer = ({ ns, title, hidden = "xs:hidden sm:hidden md:hidden lg:hi
 	}, [data]);
 
 	return (
-		<div className={`h-[85.5vh] overflow-hidden bg-red-100 rounded-2lg  dark:bg-[#223449] ${hidden} xs:h-[100vh] sm:h-[50vh]`}>
+		<div className={`max-h-[85.5vh] h-fit bg-red-100 rounded-2lg  dark:bg-[#223449] ${hidden} xs:h-[100vh] sm:h-[50vh]`}>
 			<div className="flex flex-row items-center justify-center px-5 rounded-t-2lg h-14">
 				<button onClick={() => router.push("/")}>
 					<svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
@@ -46,7 +46,11 @@ const CatContainer = ({ ns, title, hidden = "xs:hidden sm:hidden md:hidden lg:hi
 					<p className="mt-4 text-sm text-start">Search Results:</p>
 				</div>
 			)}
-			<div className="mt-6 scrl h-[calc(100vh_-_200px)] pb-8 xs:h-[calc(100vh_-_40vh)] sm:h-[calc(100vh_-_40vh)] scroll-smooth">
+
+			<div
+				className={`mt-6 scrl ${
+					search ? "h-[calc(100vh_-_330px)]" : ""
+				} max-h-[calc(100vh_-_220px)] pb-8 xs:h-[calc(100vh_-_40vh)] sm:h-[calc(100vh_-_40vh)]`}>
 				{cats &&
 					cats.map((item, index) => (
 						<CatList
