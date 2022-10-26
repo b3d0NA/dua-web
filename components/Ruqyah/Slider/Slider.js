@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import RangeSlider from "../../Widget/RangeSlder";
+import AudioVisualizer from "../UI/AudioVisualizer.js";
 import PlayList from "../UI/PlayList";
 const playlist = [
 	{
@@ -155,7 +156,7 @@ const Slider = () => {
 						<p className="font-medium font-inter xs:text-sm xs:leading-4">
 							{player + 1}. {name}
 						</p>
-						{/* {isReady.current && <AudioVisualizer isPlaying={isPlaying} player={player} audio={audioRef.current} />} */}
+						{isReady.current && <AudioVisualizer isPlaying={isPlaying} player={player} audio={audioRef.current} />}
 						{!isReady.current && (
 							<svg className="w-5 h-5 m-auto text-gray-800 animate-spin" fill="none" viewBox="0 0 24 24">
 								<circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
