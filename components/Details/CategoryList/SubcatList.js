@@ -7,7 +7,7 @@ const SubCatList = (props) => {
 
 	// console.log(data);
 	return (
-		<div className="my-2 ml-12 border-l-2 border-dotted border-">
+		<div className="my-2 ml-12 border-l-2 border-dotted subact-list">
 			<div className="flex flex-col items-start justify-start ml-3 border-dotted gap-y-2 ">
 				{data &&
 					data?.result

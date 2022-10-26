@@ -9,7 +9,7 @@ const CatList = (props) => {
 
 	const handleClick = (e) => {
 		e.preventDefault();
-		e.target.scrollIntoView(true);
+		e.target.scrollIntoView({ behavior: "smooth", block: "start" });
 		if (!isOpen) {
 			SubCatApi.getSubCategory(props.catId);
 		}
@@ -17,10 +17,10 @@ const CatList = (props) => {
 	};
 
 	useEffect(() => {
-		if (props.isOpen) {
+		if (isOpen) {
 			catRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
 		}
-	}, [props.catId, catRef, props.isOpen]);
+	}, [props.catId, catRef, isOpen]);
 
 	return (
 		<div className="group" ref={catRef}>
