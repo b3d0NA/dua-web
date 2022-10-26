@@ -4,6 +4,7 @@ import SearchBox from "../Widget/SearchBox";
 import CatList from "./CategoryList/CatList";
 
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 const CatContainer = ({ ns, title, hidden = "xs:hidden sm:hidden md:hidden lg:hidden" }) => {
 	const [search, setSearch] = useState(false);
@@ -11,10 +12,16 @@ const CatContainer = ({ ns, title, hidden = "xs:hidden sm:hidden md:hidden lg:hi
 	const data = useSelector((state) => state.duaCat.data);
 	const { language } = useSelector((state) => state.globalData.settings);
 
+	const [cats, setCats] = useState([]);
+
 	const handleSearch = (e) => {
 		e.preventDefault();
 		setSearch(!search);
 	};
+
+	useEffect(() => {
+		data?.result && setCats(data.result);
+	}, [data]);
 
 	return (
 		<div className={`h-[85.5vh] overflow-hidden bg-red-100 rounded-2lg  dark:bg-[#223449] ${hidden} xs:h-[100vh] sm:h-[50vh]`}>
@@ -33,15 +40,15 @@ const CatContainer = ({ ns, title, hidden = "xs:hidden sm:hidden md:hidden lg:hi
 					<SearchIcon height="22" color="stroke-white" />
 				</button>
 			</div>
+			{search && (
+				<div className="mx-3 mt-5">
+					<SearchBox setCats={setCats} hint={`${"Search " + title}`} />
+					<p className="mt-4 text-sm text-start">Search Results:</p>
+				</div>
+			)}
 			<div className="mt-6 scrl h-[calc(100vh_-_200px)] pb-8 xs:h-[calc(100vh_-_40vh)] sm:h-[calc(100vh_-_40vh)] scroll-smooth">
-				{search && (
-					<div className="mx-3 mt-5">
-						<SearchBox hint={`${"Search " + title}`} />
-						<p className="mt-4 text-sm text-start">Search Results:</p>
-					</div>
-				)}
-				{data &&
-					data?.result?.map((item, index) => (
+				{cats &&
+					cats.map((item, index) => (
 						<CatList
 							key={index}
 							isOpen={parseInt(item.cat_id) === parseInt(router.query.cat_id) ? true : false}

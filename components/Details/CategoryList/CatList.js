@@ -24,7 +24,7 @@ const CatList = (props) => {
 
 	return (
 		<div className="group" ref={catRef}>
-			<a href="/#" onClick={handleClick}>
+			<button onClick={handleClick}>
 				<div className="flex items-center justify-between mx-3 bg-red-100 dark:bg-transparent">
 					<div className="flex flex-row items-center justify-between w-full px-3 h-18 ">
 						<div className="flex flex-row items-center">
@@ -35,7 +35,7 @@ const CatList = (props) => {
 						</div>
 					</div>
 				</div>
-			</a>
+			</button>
 			{isOpen && <SubCatList catId={props.catId} />}
 		</div>
 	);
